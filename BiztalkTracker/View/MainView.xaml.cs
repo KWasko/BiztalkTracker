@@ -27,43 +27,13 @@ namespace BiztalkTracker.View
     /// </summary>
     public partial class MainView : Window
     {
-        const bool _isProd = true;
+        
 
         public MainView()
         {
           
             InitializeComponent();
 
-            string connectionString = "";
-            if (_isProd)
-            {
-                // connectionString = "Data Source=" + "TPCCLBIZSQLS" + ";Initial Catalog=" + "BizTalkDTADb" + ";Integrated Security=True;User Id=exsalwo;Password=Tikkurila123;"; ;
-                connectionString = "Data Source=" + "TPCCLBIZSQLS" + ";Initial Catalog=" + "BizTalkDTADb" + ";Integrated Security=True";
-            }
-            else
-            {
-                connectionString = "Data Source=" + "FIS10157V" + ";Initial Catalog=" + "BizTalkDTADb" + ";Integrated Security=True";
-            }
-            using (var con = new SqlConnection(connectionString))
-            {
-                con.Open();
-
-            }
-
-            var search = new SearchData()
-            {
-                BodyText = "<OrderNumber>00597717</OrderNumber",
-                SchemaName = "Document-Order",
-                ServiceName="OrderToAx2012",
-                DateFrom =  DateTime.Parse("2017-02-20 00:00:00"),
-               // DateTo = new DateTime(2017, 12, 1, 0, 0, 0),
-                Location = null,               
-                //ReceivePortName="ECODOrder_RP",
-                //ReceiveLocationName="null",
-                //Port = "prtEcodOrder",
-                QueryLimit=500
-
-            };
             //var messages = GetTrackedMessages(search);
             //dataGrid.ItemsSource = messages;
         }

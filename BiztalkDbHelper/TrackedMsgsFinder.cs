@@ -9,8 +9,8 @@ using System.Data.SqlClient;
 
 namespace BiztalkDbHelper
 {
-	public class TrackedMsgsFinder
-	{
+	public class TrackedMsgsFinder: ITrackedMsgsFinder
+    {
 		public List<Message> GetTrackedMessages(MsgSearchQuery query, SqlConnection sqlConnection)
 		{
 			string sqlQuery = @"SELECT TOP " + query.QueryLimit + @" trackData.[MessageInstance/InstanceID]
@@ -78,6 +78,10 @@ namespace BiztalkDbHelper
             if (!string.IsNullOrEmpty(query.ReceiveLocationName))
             {
                 messages = messages.Where(m => m.ContextItems.Any(c => c.Property == "ReceiveLocationName" && c.Value.Contains(query.ReceiveLocationName, StringComparison.InvariantCultureIgnoreCase)));
+            }
+            if (!string.IsNullOrEmpty(query.ReceivedFileName))
+            {
+                messages = messages.Where(m => m.ContextItems.Any(c => c.Property == "ReceivedFileName" && c.Value.Contains(query.ReceivedFileName, StringComparison.InvariantCultureIgnoreCase)));
             }
 
             return messages;
