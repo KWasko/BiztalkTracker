@@ -19,7 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using BiztalkTracker.ViewModel;
 namespace BiztalkTracker.View
 {
     /// <summary>
@@ -27,18 +27,15 @@ namespace BiztalkTracker.View
     /// </summary>
     public partial class MainView : Window
     {
-        
+        public MainViewModel ViewModel { get; set; }
 
         public MainView()
         {
+            ViewModel = new MainViewModel();
           
             InitializeComponent();
 
-            //var messages = GetTrackedMessages(search);
-            //dataGrid.ItemsSource = messages;
         }
-
-        
 
         private void dataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {

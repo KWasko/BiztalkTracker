@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace BiztalkDbHelper
 {
-    interface ITrackedMsgsFinder
+    public interface ITrackedMsgsFinder
     {
-        List<Message> GetTrackedMessages(MsgSearchQuery query, SqlConnection sqlConnection)
+        List<Message> GetTrackedMessages(MsgSearchQuery query, SqlConnection sqlConnection);
     }
 }
