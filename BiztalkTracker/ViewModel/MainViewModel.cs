@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using BiztalkDbHelper;
 using BiztalkDbHelper.Model;
+using BiztalkTracker.Model;
+using AutoMapper;
 
 namespace BiztalkTracker.ViewModel
 {
@@ -16,14 +18,17 @@ namespace BiztalkTracker.ViewModel
         public List<string> ConnectionStringsList { get; set; }
         public string SelectedConnectionString { get; set;}
 
-        public ObservableCollection<Message> Messages { get; set; }
+        public ObservableCollection<SelectableMessage> Messages { get; set; }
         public MainViewModel()
         {
-            Messages = new ObservableCollection<Message>();
+            Messages = new ObservableCollection<SelectableMessage>();
             ConnectionStringsList = new List<string> ();
             ConnectionStringsList.AddRange(Properties.Settings.Default.ConnectionStrings.Cast<string>().ToList());
             SelectedConnectionString = ConnectionStringsList.FirstOrDefault();
-            GetMessages();
+
+            Mapper.Initialize(cfg => cfg.CreateMap<Message, SelectableMessage>());
+
+            //  GetMessages();
         }
         public void GetMessages()
         {
@@ -55,7 +60,8 @@ namespace BiztalkTracker.ViewModel
                 Messages.Clear();
              foreach(var msg in messages)
                 {
-                    Messages.Add(msg);
+                    var selectableMessage = Mapper.Instance.Map<SelectableMessage>(msg);
+                    Messages.Add(selectableMessage);
                 }
             }
         }
