@@ -8,7 +8,7 @@ namespace BiztalkDbHelper.Model
 {
     public class MsgSearchQuery
     {
-        public BodyAndContextDependedSearchQuery MsgBodyAndContextDependedSearchQuery{ get; set; }
+        public BodyAndContextDependedSearchQuery MsgBodyAndContextDependedSearchQuery { get; set; } = new BodyAndContextDependedSearchQuery();
         public string SchemaName { get; set; }
         public string Url { get; set; }
         public string Location { get; set; }    

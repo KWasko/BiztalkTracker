@@ -30,6 +30,7 @@ namespace BiztalkTracker.ViewModel
         public SelectableMessage SelectedMessage { get; set; }
 
         public ICommand SearchCommand { get; set; }
+        public ICommand ClearSearchDataCommand { get; set; }
         public ICommand SaveMessagesCommand { get; set; }
         public MainViewModel()
         {
@@ -45,6 +46,7 @@ namespace BiztalkTracker.ViewModel
             Mapper.Initialize(cfg => cfg.CreateMap<Message, SelectableMessage>());
 
             SearchCommand = new DelegateCommand(GetMessages);
+            ClearSearchDataCommand = new DelegateCommand(ClearSearchData);
             SaveMessagesCommand = new DelegateCommand(SaveMessages);
 
         }
@@ -52,8 +54,8 @@ namespace BiztalkTracker.ViewModel
         {
             using (var con = new SqlConnection(SelectedConnectionString))
             {
-                //ITrackedMsgsFinder trMsgFinder = new TrackedMsgsFinder();
-                ITrackedMsgsFinder trMsgFinder = new FakeTrackedMsgsFinder();
+                ITrackedMsgsFinder trMsgFinder = new TrackedMsgsFinder();
+                //ITrackedMsgsFinder trMsgFinder = new FakeTrackedMsgsFinder();
                 List<Message> messages = null;
                 try
                 {
@@ -95,11 +97,17 @@ namespace BiztalkTracker.ViewModel
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message, "Saving messages", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                   
-                  
+                    }            
                 }
             }
+        }
+
+        public void ClearSearchData()
+        {
+          var dlgResult=  MessageBox.Show("Are you sure do you want to clear search definitions?", "Clearing search data", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+
+            if (dlgResult == MessageBoxResult.Yes)
+                SearchQuery = new MsgSearchQuery();
         }
     }
 }

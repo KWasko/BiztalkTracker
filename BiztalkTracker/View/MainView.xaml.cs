@@ -48,6 +48,7 @@ namespace BiztalkTracker.View
 
         private void CopyCellValue_Click(object sender, RoutedEventArgs e)
         {
+            if (dataGrid.SelectedCells.Count == 0) return;
             var cellInfo = dataGrid.SelectedCells[0];
 
             var content = cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock;
