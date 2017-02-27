@@ -113,6 +113,7 @@
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Save selected messages body" Command="{Binding ViewModel.SaveMessagesCommand}"></MenuItem>
+                        <MenuItem Header="Copy cell value" Click="CopyCellValue_Click"></MenuItem>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
                 <DataGrid.Columns>

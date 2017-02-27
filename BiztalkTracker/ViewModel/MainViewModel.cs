@@ -52,7 +52,8 @@ namespace BiztalkTracker.ViewModel
         {
             using (var con = new SqlConnection(SelectedConnectionString))
             {
-                ITrackedMsgsFinder trMsgFinder = new TrackedMsgsFinder();
+                //ITrackedMsgsFinder trMsgFinder = new TrackedMsgsFinder();
+                ITrackedMsgsFinder trMsgFinder = new FakeTrackedMsgsFinder();
                 List<Message> messages = null;
                 try
                 {

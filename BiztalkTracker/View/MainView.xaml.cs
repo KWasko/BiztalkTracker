@@ -45,5 +45,13 @@ namespace BiztalkTracker.View
            // contextTextBox.Text = (e.AddedCells[0].Item as SelectableMessage).Context;
            // bodyTextBox.Text = (e.AddedCells[0].Item as SelectableMessage).BodyFormatted;
         }
+
+        private void CopyCellValue_Click(object sender, RoutedEventArgs e)
+        {
+            var cellInfo = dataGrid.SelectedCells[0];
+
+            var content = cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock;
+            Clipboard.SetText(content.Text);
+        }
     }
 }
