@@ -12,6 +12,8 @@ using AutoMapper;
 using System.Windows.Input;
 using BiztalkDbHelper.Utils;
 using PropertyChanged;
+using System.IO;
+using System.Windows;
 
 namespace BiztalkTracker.ViewModel
 {
@@ -28,6 +30,7 @@ namespace BiztalkTracker.ViewModel
         public SelectableMessage SelectedMessage { get; set; }
 
         public ICommand SearchCommand { get; set; }
+        public ICommand SaveMessagesCommand { get; set; }
         public MainViewModel()
         {
             SearchQuery = new MsgSearchQuery()
@@ -42,7 +45,8 @@ namespace BiztalkTracker.ViewModel
             Mapper.Initialize(cfg => cfg.CreateMap<Message, SelectableMessage>());
 
             SearchCommand = new DelegateCommand(GetMessages);
-           
+            SaveMessagesCommand = new DelegateCommand(SaveMessages);
+
         }
         public void GetMessages()
         {
@@ -76,6 +80,34 @@ namespace BiztalkTracker.ViewModel
                 {
                     var selectableMessage = Mapper.Instance.Map<SelectableMessage>(msg);
                     Messages.Add(selectableMessage);
+                }
+            }
+        }
+
+        public void SaveMessages()
+        {
+            var messages = Messages.Where(m => m.IsSelected).ToList();
+            if (messages.Count == 0) return;
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog() { Description ="Choose directory where messages will be saved"})
+            {
+                System.Windows.Forms.DialogResult result = dialog.ShowDialog();
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    try
+                    {
+                        foreach (var msg in messages)
+                        {
+                            string msgFilePath = Path.Combine(dialog.SelectedPath, msg.Id + ".txt");
+                            File.WriteAllText(msgFilePath, msg.Body, Encoding.UTF8);
+                        }
+                        MessageBox.Show("Operation completed.", "Saving messages", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Saving messages", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                   
+                  
                 }
             }
         }

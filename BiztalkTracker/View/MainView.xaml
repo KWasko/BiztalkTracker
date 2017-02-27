@@ -92,6 +92,11 @@
         </StackPanel>
         <GroupBox Header="Messages" Grid.Column="1 " Grid.Row="0">
             <DataGrid  Name="dataGrid"  Grid.ColumnSpan="1"  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" SelectionMode="Extended" SelectionUnit="CellOrRowHeader" ColumnWidth="100" SelectedCellsChanged="dataGrid_SelectedCellsChanged" ItemsSource="{Binding ViewModel.Messages}" AutoGenerateColumns="False">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Save selected messages body" Command="{Binding ViewModel.SaveMessagesCommand}"></MenuItem>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
                 <DataGrid.Columns>
                     <DataGridTemplateColumn IsReadOnly="False" Width="25" >
                         <DataGridTemplateColumn.CellTemplate>
@@ -105,12 +110,10 @@
                     <DataGridTextColumn Header="Schema Name" Binding="{Binding SchemaName}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Port Name" Binding="{Binding PortName}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Port Direction" Binding="{Binding PortDirection}"></DataGridTextColumn>
-                   
                     <DataGridTextColumn Header="URL" Binding="{Binding URL}"></DataGridTextColumn>
                     <DataGridTextColumn Header="TimeStamp" Binding="{Binding TimeStamp}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Adapter" Binding="{Binding Adapter}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Size" Binding="{Binding Size}"></DataGridTextColumn>
-                   
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
