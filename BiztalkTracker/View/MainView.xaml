@@ -25,7 +25,7 @@
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
             <GroupBox Header="SQL Connection" Width="300"  HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5">
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox Height="30" Width="278"  ItemsSource="{Binding ViewModel.ConnectionStringsList}" IsEditable="True" SelectedValue="{Binding ViewModel.SelectedConnectionString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <ComboBox Height="30" Width="278"  ItemsSource="{Binding ViewModel.ConnectionStringsList}" IsEditable="True"  SelectedValue="{Binding ViewModel.SelectedConnectionString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 </StackPanel>
             </GroupBox>

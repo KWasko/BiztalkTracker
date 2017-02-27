@@ -15,5 +15,16 @@ namespace BiztalkDbHelper.Model
 
         public string CustomContextFieldName { get; set; }
         public string CustomContextFieldValue { get; set; }
+
+
+        public bool IsAnyFilteringSet { get
+            {
+                return !string.IsNullOrEmpty(BodyText)
+                    || !string.IsNullOrEmpty(ReceivePortName)
+                    || !string.IsNullOrEmpty(ReceiveLocationName)
+                    || !string.IsNullOrEmpty(ReceivedFileName)
+                    || !string.IsNullOrEmpty(CustomContextFieldName);
+            }
+        }
     }
 }
