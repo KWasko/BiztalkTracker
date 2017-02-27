@@ -106,13 +106,14 @@
                 </Grid>
 
             </GroupBox>
-            <Button Margin="5" Padding="5" Content="Clear all search definition" Command="{Binding ViewModel.ClearSearchDataCommand}"/>
+            <Button Margin="5" Padding="5" Content="Clear all search definition" Command="{Binding ViewModel.ClearSearchDefinitionCommand}"/>
             <Button Margin="5" Padding="5" Content="Find messages" Command="{Binding ViewModel.SearchCommand}"/>
         </StackPanel>
         <GroupBox Header="Messages" Grid.Column="1 " Grid.Row="0">
             <DataGrid  Name="dataGrid"  Grid.ColumnSpan="1"  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" SelectionMode="Extended" SelectionUnit="CellOrRowHeader" ColumnWidth="100" SelectedCellsChanged="dataGrid_SelectedCellsChanged" ItemsSource="{Binding ViewModel.Messages}" AutoGenerateColumns="False">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
+                        <MenuItem Header="Select all messages" Command="{Binding ViewModel.SelectAllMessagesCommand}"></MenuItem>
                         <MenuItem Header="Save selected messages body" Command="{Binding ViewModel.SaveMessagesCommand}"></MenuItem>
                         <MenuItem Header="Copy cell value" Click="CopyCellValue_Click"></MenuItem>
                     </ContextMenu>
@@ -145,10 +146,12 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <GroupBox Grid.Column="1"  Header="Message Body">
-                <TextBox  Name="bodyTextBox"  Text="{Binding ViewModel.SelectedMessage.BodyFormatted, Mode=OneWay}" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBox>
+                <TextBox   Name="contextTextBox" Text="{Binding ViewModel.SelectedMessage.BodyFormatted, Mode=OneWay}" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBox>
+
             </GroupBox>
             <GroupBox Grid.Column="0"  Header="Message Context">
-                <TextBox   Name="contextTextBox" Text="{Binding ViewModel.SelectedMessage.Context, Mode=OneWay}" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBox>
+                <DataGrid  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" SelectionMode="Extended" SelectionUnit="CellOrRowHeader" ColumnWidth="250"  ItemsSource="{Binding ViewModel.SelectedMessage.ContextItems, Mode=OneWay}" AutoGenerateColumns="True">
+                </DataGrid>
             </GroupBox>
         </Grid>
     </Grid>

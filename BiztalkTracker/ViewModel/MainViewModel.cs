@@ -30,7 +30,8 @@ namespace BiztalkTracker.ViewModel
         public SelectableMessage SelectedMessage { get; set; }
 
         public ICommand SearchCommand { get; set; }
-        public ICommand ClearSearchDataCommand { get; set; }
+        public ICommand ClearSearchDefinitionCommand { get; set; }
+        public ICommand SelectAllMessagesCommand { get; set; }
         public ICommand SaveMessagesCommand { get; set; }
         public MainViewModel()
         {
@@ -46,8 +47,9 @@ namespace BiztalkTracker.ViewModel
             Mapper.Initialize(cfg => cfg.CreateMap<Message, SelectableMessage>());
 
             SearchCommand = new DelegateCommand(GetMessages);
-            ClearSearchDataCommand = new DelegateCommand(ClearSearchData);
-            SaveMessagesCommand = new DelegateCommand(SaveMessages);
+            ClearSearchDefinitionCommand = new DelegateCommand(ClearSearchData);
+            SaveMessagesCommand = new DelegateCommand(SaveMessages,()=> Messages.Any(m=>m.IsSelected));
+            SelectAllMessagesCommand = new DelegateCommand(()=> { foreach (var msg in Messages) msg.IsSelected = true; });
 
         }
         public void GetMessages()
