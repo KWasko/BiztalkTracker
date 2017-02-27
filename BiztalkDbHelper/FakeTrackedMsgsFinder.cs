@@ -32,7 +32,7 @@ namespace BiztalkDbHelper
                     ServiceName = "Service" + i,
                     URL = "http://www.fake.com/" + i,
                     TimeStamp = DateTime.Now.AddMinutes(i),
-                    Size = 99 * i,
+                    Size = "99"+ i,
                 });
             }
           

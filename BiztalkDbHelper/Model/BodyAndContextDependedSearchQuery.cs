@@ -12,5 +12,8 @@ namespace BiztalkDbHelper.Model
         public string ReceivePortName { get; set; }
         public string ReceiveLocationName { get; set; }
         public string ReceivedFileName { get; set; }
+
+        public string CustomContextFieldName { get; set; }
+        public string CustomContextFieldValue { get; set; }
     }
 }

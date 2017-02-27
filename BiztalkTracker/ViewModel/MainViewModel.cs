@@ -52,31 +52,20 @@ namespace BiztalkTracker.ViewModel
         {
             using (var con = new SqlConnection(SelectedConnectionString))
             {
-               // con.Open();
-
-            
-            ITrackedMsgsFinder trMsgFinder = new FakeTrackedMsgsFinder();    
-
-            MsgSearchQuery query = new MsgSearchQuery()
-            {               
-                SchemaName = "Document-Order",
-                ServiceName = "OrderToAx2012",
-               // DateFrom = DateTime.Parse("2017-02-20 00:00:00"),
-                // DateTo = new DateTime(2017, 12, 1, 0, 0, 0),
-                Location = null,
-                //Port = "prtEcodOrder",
-                QueryLimit = 500,
-                MsgBodyAndContextDependedSearchQuery = new BiztalkDbHelper.Model.BodyAndContextDependedSearchQuery()
+                ITrackedMsgsFinder trMsgFinder = new TrackedMsgsFinder();
+                List<Message> messages = null;
+                try
                 {
-                    BodyText = "<OrderNumber>00597717</OrderNumber",
-                    ReceiveLocationName=null,
-                    ReceivePortName=null                   
+                     messages = trMsgFinder.GetTrackedMessages(SearchQuery, con);
                 }
-            };
-
-            List<Message> messages = trMsgFinder.GetTrackedMessages(null, con);
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Fetching messages", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+           
                 Messages.Clear();
-             foreach(var msg in messages)
+                foreach(var msg in messages)
                 {
                     var selectableMessage = Mapper.Instance.Map<SelectableMessage>(msg);
                     Messages.Add(selectableMessage);

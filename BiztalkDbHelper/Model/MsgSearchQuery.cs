@@ -10,9 +10,12 @@ namespace BiztalkDbHelper.Model
     {
         public BodyAndContextDependedSearchQuery MsgBodyAndContextDependedSearchQuery{ get; set; }
         public string SchemaName { get; set; }
+        public string Url { get; set; }
         public string Location { get; set; }    
         public string Port { get; set; }
         public string ServiceName { get; set; }
+        public string ServiceId { get; set; }
+        public string MessageId { get; set; }
         public DateTime? DateFrom { get
             {
                 try
@@ -44,11 +47,11 @@ namespace BiztalkDbHelper.Model
                 }
             }
         }
-        public int QueryLimit { get; set; }
+        public int QueryLimit { get; set; } = 500;
 
         public MsgSearchQuery()
         {
-            DateFromString = DateTime.Now.ToString();
+            DateFromString = DateTime.Now.Date.ToString();
             DateToString = DateTime.Now.ToString();
         }
     }

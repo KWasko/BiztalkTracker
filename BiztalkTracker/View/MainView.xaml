@@ -25,7 +25,7 @@
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
             <GroupBox Header="SQL Connection" Width="300"  HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5">
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox Height="30" Width="278"  ItemsSource="{Binding ViewModel.ConnectionStringsList}" IsEditable="True" SelectedItem="{Binding ViewModel.SelectedConnectionString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <ComboBox Height="30" Width="278"  ItemsSource="{Binding ViewModel.ConnectionStringsList}" IsEditable="True" SelectedValue="{Binding ViewModel.SelectedConnectionString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 </StackPanel>
             </GroupBox>
@@ -37,6 +37,10 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                         <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
@@ -44,22 +48,29 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Label Grid.Column="0" Grid.Row="0" Content="Schema Name:"/>
-                    <TextBox Grid.Column="1" Grid.Row="0" Width="168"  Text="{Binding ViewModel.SearchQuery.SchemaName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <Label Grid.Column="0" Grid.Row="1" Content="Location:"/>
-                    <TextBox Grid.Column="1" Grid.Row="1"  Text="{Binding ViewModel.SearchQuery.Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <Label Grid.Column="0" Grid.Row="2" Content="Port:"/>
-                    <TextBox Grid.Column="1" Grid.Row="2"  Text="{Binding ViewModel.SearchQuery.Port, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <Label Grid.Column="0" Grid.Row="3" Content="ServiceName:"/>
-                    <TextBox Grid.Column="1" Grid.Row="3"  Text="{Binding ViewModel.SearchQuery.ServiceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <Label Grid.Column="0" Grid.Row="4" Content="TimeStamp From:"/>
-                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding ViewModel.SearchQuery.DateFromString}"/>
+                    <Label Grid.Column="0" Grid.Row="0" Content="Message Id:"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" Width="168"  Text="{Binding ViewModel.SearchQuery.MessageId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Grid.Column="0" Grid.Row="1" Content="Service Id:"/>
+                    <TextBox Grid.Column="1" Grid.Row="1"  Text="{Binding ViewModel.SearchQuery.ServiceId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Grid.Column="0" Grid.Row="2" Content="Service Name:"/>
+                    <TextBox Grid.Column="1" Grid.Row="2"  Text="{Binding ViewModel.SearchQuery.ServiceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Grid.Column="0" Grid.Row="3" Content="Schema Name:"/>
+                    <TextBox Grid.Column="1" Grid.Row="3" Width="168"  Text="{Binding ViewModel.SearchQuery.SchemaName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Grid.Column="0" Grid.Row="4" Content="URL:"/>
+                    <TextBox Grid.Column="1" Grid.Row="4" Width="168"  Text="{Binding ViewModel.SearchQuery.Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Grid.Column="0" Grid.Row="5" Content="Location:"/>
+                    <TextBox Grid.Column="1" Grid.Row="5"  Text="{Binding ViewModel.SearchQuery.Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Grid.Column="0" Grid.Row="6" Content="Port:"/>
+                    <TextBox Grid.Column="1" Grid.Row="6"  Text="{Binding ViewModel.SearchQuery.Port, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                   
+                    <Label Grid.Column="0" Grid.Row="7" Content="TimeStamp From:"/>
+                    <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding ViewModel.SearchQuery.DateFromString}"/>
                   
-                    <Label Grid.Column="0" Grid.Row="5" Content="TimeStamp to:"/>
-                    <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding ViewModel.SearchQuery.DateToString}"/>
+                    <Label Grid.Column="0" Grid.Row="8" Content="TimeStamp to:"/>
+                    <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding ViewModel.SearchQuery.DateToString}"/>
 
-                    <Label Grid.Column="0" Grid.Row="6" Content="Query Limit:"/>
-                    <TextBox Grid.Column="1" Grid.Row="6"  Text="{Binding ViewModel.SearchQuery.QueryLimit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Grid.Column="0" Grid.Row="9" Content="Query Limit:"/>
+                    <TextBox Grid.Column="1" Grid.Row="9"  Text="{Binding ViewModel.SearchQuery.QueryLimit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
 
             </GroupBox>
@@ -74,6 +85,8 @@
                         <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
 
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0" Grid.Row="0" Content="Body Text:"/>
@@ -84,6 +97,11 @@
                     <TextBox Grid.Column="1" Grid.Row="2"  Text="{Binding ViewModel.SearchQuery.MsgBodyAndContextDependedSearchQuery.ReceiveLocationName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <Label Grid.Column="0" Grid.Row="3" Content="Rcv File Name:"/>
                     <TextBox Grid.Column="1" Grid.Row="3"  Text="{Binding ViewModel.SearchQuery.MsgBodyAndContextDependedSearchQuery.ReceivedFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Grid.Column="0" Grid.Row="4" Content="Cust. Field Name:"/>
+                    <TextBox Grid.Column="1" Grid.Row="4"  Text="{Binding ViewModel.SearchQuery.MsgBodyAndContextDependedSearchQuery.CustomContextFieldName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Grid.Column="0" Grid.Row="5" Content="Cust. Field Value:"/>
+                    <TextBox Grid.Column="1" Grid.Row="5"  Text="{Binding ViewModel.SearchQuery.MsgBodyAndContextDependedSearchQuery.CustomContextFieldValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
 
                 </Grid>
 
@@ -107,6 +125,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Message Id" Binding="{Binding Id}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Service Id" Binding="{Binding ServiceId}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Service Name" Binding="{Binding ServiceName}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Schema Name" Binding="{Binding SchemaName}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Port Name" Binding="{Binding PortName}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Port Direction" Binding="{Binding PortDirection}"></DataGridTextColumn>

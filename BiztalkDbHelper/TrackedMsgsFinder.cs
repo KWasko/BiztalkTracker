@@ -51,7 +51,13 @@ namespace BiztalkDbHelper
 				sqlQuery += string.Format("\nAND trackData.[Event/Port] LIKE'%{0}%'", query.Port.Replace("'", "''"));
 			if (!string.IsNullOrWhiteSpace(query.ServiceName))
 				sqlQuery += string.Format("\nAND trackData.[ServiceInstance/ServiceName] LIKE'%{0}%'", query.ServiceName.Replace("'", "''"));
-			sqlQuery += "\n order by trackData.[Event/Timestamp] desc";
+            if (!string.IsNullOrWhiteSpace(query.ServiceId))
+                sqlQuery += string.Format("\nAND trackData.[ServiceInstance/ServiceId] LIKE'%{0}%'", query.ServiceId.Replace("'", "''"));
+            if (!string.IsNullOrWhiteSpace(query.MessageId))
+                sqlQuery += string.Format("\nAND trackData.[MessageInstance/InstanceID] LIKE'%{0}%'", query.MessageId.Replace("'", "''"));
+            if (!string.IsNullOrWhiteSpace(query.Url))
+                sqlQuery += string.Format("\nAND trackData.[Event/URL] LIKE'%{0}%'", query.Url.Replace("'", "''"));
+            sqlQuery += "\n order by trackData.[Event/Timestamp] desc";
 
 			IEnumerable<Message> messages = new List<Message>();
 		   
@@ -91,6 +97,11 @@ namespace BiztalkDbHelper
                 messages = messages.Where(m => m.ContextItems.Any(c => c.Property == "ReceivedFileName" && c.Value.Contains(query.ReceivedFileName, StringComparison.InvariantCultureIgnoreCase)));
             }
 
+            if (!string.IsNullOrEmpty(query.CustomContextFieldName) && query.CustomContextFieldValue!=null)
+            {
+                messages = messages.Where(m => m.ContextItems.Any(c => c.Property.Contains(query.CustomContextFieldName, StringComparison.InvariantCultureIgnoreCase) && c.Value.Contains(query.CustomContextFieldValue, StringComparison.InvariantCultureIgnoreCase)));
+            }
+
             return messages;
         }
         private List<Message> GetMessages(SqlDataReader sqlReader)
@@ -110,7 +121,8 @@ namespace BiztalkDbHelper
                     Adapter = (string)sqlReader["Event/Adapter"],
 					TimeStamp = ((DateTime)sqlReader["Event/Timestamp"]).AddHours(2),
 					URL = ((string)sqlReader["Event/URL"]),
-					Context = sqlReader["imgContext"] != DBNull.Value ? decompressor.DecompressMsgContextAsXml((byte[])sqlReader["imgContext"]) : null,
+                    Size= sqlReader["MessageInstance/Size"]!=DBNull.Value ? sqlReader["MessageInstance/Size"].ToString() : null,
+                    Context = sqlReader["imgContext"] != DBNull.Value ? decompressor.DecompressMsgContextAsXml((byte[])sqlReader["imgContext"]) : null,
 					ContextItems = sqlReader["imgContext"] != DBNull.Value ? decompressor.DecompressMsgContext((byte[])sqlReader["imgContext"]) : new List<ContextItem>(),
 					Body = sqlReader["imgPart"] != DBNull.Value ? decompressor.DecompressMsg((byte[])sqlReader["imgPart"]) : null
 				};

@@ -19,7 +19,7 @@ namespace BiztalkDbHelper.Model
          public string Adapter { get; set; }
          public string URL { get; set; }
          public string Body { get; set; }
-         public int Size { get; set; }
+         public string Size { get; set; }
         public string BodyFormatted
          {
              get
