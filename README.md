@@ -1,4 +1,2 @@
 # BiztalkTracker
-Tool designed to find messages by properties and body in Biztalk Tracking Database.
-
-Project is not finished yet.
+Tool designed to easy find messages in Biztalk Tracking Database by its context properties and body text.

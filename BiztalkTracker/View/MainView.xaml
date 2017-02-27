@@ -12,7 +12,6 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition />
-
         </Grid.RowDefinitions>
         <!--<GridSplitter Grid.Column="1" 
                         Grid.RowSpan="2" 
@@ -26,7 +25,6 @@
             <GroupBox Header="SQL Connection" Width="300"  HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5">
                 <StackPanel Orientation="Horizontal">
                     <ComboBox Height="30" Width="278"  ItemsSource="{Binding ViewModel.ConnectionStringsList}" IsEditable="True"  SelectedValue="{Binding ViewModel.SelectedConnectionString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="Search Query" Width="300" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5">
@@ -62,17 +60,13 @@
                     <TextBox Grid.Column="1" Grid.Row="5"  Text="{Binding ViewModel.SearchQuery.Location, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <Label Grid.Column="0" Grid.Row="6" Content="Port:"/>
                     <TextBox Grid.Column="1" Grid.Row="6"  Text="{Binding ViewModel.SearchQuery.Port, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                   
                     <Label Grid.Column="0" Grid.Row="7" Content="TimeStamp From:"/>
                     <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding ViewModel.SearchQuery.DateFromString}"/>
-                  
                     <Label Grid.Column="0" Grid.Row="8" Content="TimeStamp to:"/>
                     <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding ViewModel.SearchQuery.DateToString}"/>
-
                     <Label Grid.Column="0" Grid.Row="9" Content="Query Limit:"/>
                     <TextBox Grid.Column="1" Grid.Row="9"  Text="{Binding ViewModel.SearchQuery.QueryLimit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
-
             </GroupBox>
             <GroupBox Header="Body and Context Search Query" Width="300" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5">
                 <Grid Margin="0" HorizontalAlignment="Left">
@@ -87,7 +81,6 @@
                         <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
-
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0" Grid.Row="0" Content="Body Text:"/>
                     <TextBox Grid.Column="1" Grid.Row="0" Width="168" Text="{Binding ViewModel.SearchQuery.MsgBodyAndContextDependedSearchQuery.BodyText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -97,20 +90,17 @@
                     <TextBox Grid.Column="1" Grid.Row="2"  Text="{Binding ViewModel.SearchQuery.MsgBodyAndContextDependedSearchQuery.ReceiveLocationName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <Label Grid.Column="0" Grid.Row="3" Content="Rcv File Name:"/>
                     <TextBox Grid.Column="1" Grid.Row="3"  Text="{Binding ViewModel.SearchQuery.MsgBodyAndContextDependedSearchQuery.ReceivedFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <Label Grid.Column="0" Grid.Row="4" Content="Cust. Field Name:"/>
+                    <Label Grid.Column="0" Grid.Row="4" Content="Cont. Field Name:"/>
                     <TextBox Grid.Column="1" Grid.Row="4"  Text="{Binding ViewModel.SearchQuery.MsgBodyAndContextDependedSearchQuery.CustomContextFieldName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <Label Grid.Column="0" Grid.Row="5" Content="Cust. Field Value:"/>
+                    <Label Grid.Column="0" Grid.Row="5" Content="&amp;Cont. Field Value:"/>
                     <TextBox Grid.Column="1" Grid.Row="5"  Text="{Binding ViewModel.SearchQuery.MsgBodyAndContextDependedSearchQuery.CustomContextFieldValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-
                 </Grid>
-
             </GroupBox>
             <Button Margin="5" Padding="5" Content="Clear all search definition" Command="{Binding ViewModel.ClearSearchDefinitionCommand}"/>
             <Button Margin="5" Padding="5" Content="Find messages" Command="{Binding ViewModel.SearchCommand}"/>
         </StackPanel>
         <GroupBox Header="Messages" Grid.Column="1 " Grid.Row="0">
-            <DataGrid  Name="dataGrid"  Grid.ColumnSpan="1"  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" SelectionMode="Extended" SelectionUnit="CellOrRowHeader" ColumnWidth="100" SelectedCellsChanged="dataGrid_SelectedCellsChanged" ItemsSource="{Binding ViewModel.Messages}" AutoGenerateColumns="False">
+            <DataGrid  Name="dataGrid"  Grid.ColumnSpan="1"  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" SelectionMode="Extended" SelectionUnit="CellOrRowHeader" ColumnWidth="100" SelectedCellsChanged="dataGrid_SelectedCellsChanged" ItemsSource="{Binding ViewModel.Messages}" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" AlternatingRowBackground="AliceBlue">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Select all messages" Command="{Binding ViewModel.SelectAllMessagesCommand}"></MenuItem>
@@ -147,10 +137,9 @@
             </Grid.ColumnDefinitions>
             <GroupBox Grid.Column="1"  Header="Message Body">
                 <TextBox   Name="contextTextBox" Text="{Binding ViewModel.SelectedMessage.BodyFormatted, Mode=OneWay}" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible"></TextBox>
-
             </GroupBox>
             <GroupBox Grid.Column="0"  Header="Message Context">
-                <DataGrid  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" SelectionMode="Extended" SelectionUnit="CellOrRowHeader" ColumnWidth="250"  ItemsSource="{Binding ViewModel.SelectedMessage.ContextItems, Mode=OneWay}" AutoGenerateColumns="True">
+                <DataGrid  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" SelectionMode="Extended" SelectionUnit="CellOrRowHeader" ColumnWidth="200"  ItemsSource="{Binding ViewModel.SelectedMessage.ContextItems, Mode=OneWay}" AutoGenerateColumns="True">
                 </DataGrid>
             </GroupBox>
         </Grid>

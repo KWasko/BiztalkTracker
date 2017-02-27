@@ -18,15 +18,7 @@ namespace BiztalkDbHelper.Model
         public string MessageId { get; set; }
         public DateTime? DateFrom { get
             {
-                try
-                {
-                    return DateTime.Parse(DateFromString);
-                }
-                catch (Exception)
-                {
-
-                    return null;
-                }
+                return DateTime.Parse(DateFromString);
             }
         }
 
@@ -36,15 +28,7 @@ namespace BiztalkDbHelper.Model
         {
             get
             {
-                try
-                {
-                    return DateTime.Parse(DateToString);
-                }
-                catch (Exception)
-                {
-
-                    return null;
-                }
+                return DateTime.Parse(DateToString);
             }
         }
         public int QueryLimit { get; set; } = 500;

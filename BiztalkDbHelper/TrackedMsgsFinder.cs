@@ -67,9 +67,9 @@ namespace BiztalkDbHelper
 				messages = GetMessages(reader);
 			}
 
-            if (query.MsgBodyAndContextDependedSearchQuery != null && query.QueryLimit == messages.Count())
+            if (query.MsgBodyAndContextDependedSearchQuery != null && query.MsgBodyAndContextDependedSearchQuery.IsAnyFilteringSet && query.QueryLimit == messages.Count())
             {
-                throw new Exception("query result reach its limit, cannot filter by body text because of possibility lack of data");
+                throw new Exception("query result reach its limit, cannot filter by body text or message context because of possibility lack of data");
             }else
             {
                 messages = ProcessMsgBodyAndContextFiltering(messages, query.MsgBodyAndContextDependedSearchQuery);

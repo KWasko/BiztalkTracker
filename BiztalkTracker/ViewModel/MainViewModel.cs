@@ -57,7 +57,7 @@ namespace BiztalkTracker.ViewModel
             using (var con = new SqlConnection(SelectedConnectionString))
             {
                 ITrackedMsgsFinder trMsgFinder = new TrackedMsgsFinder();
-                //ITrackedMsgsFinder trMsgFinder = new FakeTrackedMsgsFinder();
+               // ITrackedMsgsFinder trMsgFinder = new FakeTrackedMsgsFinder();
                 List<Message> messages = null;
                 try
                 {
@@ -70,6 +70,7 @@ namespace BiztalkTracker.ViewModel
                 }
            
                 Messages.Clear();
+                SelectedMessage = null;
                 foreach(var msg in messages)
                 {
                     var selectableMessage = Mapper.Instance.Map<SelectableMessage>(msg);
@@ -109,7 +110,12 @@ namespace BiztalkTracker.ViewModel
           var dlgResult=  MessageBox.Show("Are you sure do you want to clear search definitions?", "Clearing search data", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
 
             if (dlgResult == MessageBoxResult.Yes)
+            {
                 SearchQuery = new MsgSearchQuery();
+                Messages.Clear();
+                SelectedMessage = null;
+            }
+               
         }
     }
 }
