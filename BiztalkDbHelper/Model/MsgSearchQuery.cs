@@ -13,10 +13,44 @@ namespace BiztalkDbHelper.Model
         public string Location { get; set; }    
         public string Port { get; set; }
         public string ServiceName { get; set; }
-        public DateTime? DateFrom { get; set; }
-        public DateTime? DateTo { get; set; }
-       
+        public DateTime? DateFrom { get
+            {
+                try
+                {
+                    return DateTime.Parse(DateFromString);
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+            }
+        }
+
+        public string DateFromString { get; set; }
+        public string DateToString { get; set; }
+        public DateTime? DateTo
+        {
+            get
+            {
+                try
+                {
+                    return DateTime.Parse(DateToString);
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+            }
+        }
         public int QueryLimit { get; set; }
+
+        public MsgSearchQuery()
+        {
+            DateFromString = DateTime.Now.ToString();
+            DateToString = DateTime.Now.ToString();
+        }
     }
     
 }

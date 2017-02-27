@@ -20,6 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BiztalkTracker.ViewModel;
+
 namespace BiztalkTracker.View
 {
     /// <summary>
@@ -40,8 +41,9 @@ namespace BiztalkTracker.View
         private void dataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
             if (e.AddedCells.Count == 0) return;
-            contextTextBox.Text = (e.AddedCells[0].Item as Message).Context;
-            bodyTextBox.Text = (e.AddedCells[0].Item as Message).BodyFormatted;
+            ViewModel.SelectedMessage =dataGrid.SelectedCells[0].Item as SelectableMessage;
+           // contextTextBox.Text = (e.AddedCells[0].Item as SelectableMessage).Context;
+           // bodyTextBox.Text = (e.AddedCells[0].Item as SelectableMessage).BodyFormatted;
         }
     }
 }

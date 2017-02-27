@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ITrackedMsgsFinder.cs" />
+    <Compile Include="FakeTrackedMsgsFinder.cs" />
     <Compile Include="TrackedMsgsFinder.cs" />
     <Compile Include="Model\BodyAndContextDependedSearchQuery.cs" />
     <Compile Include="Model\ContextItem.cs" />

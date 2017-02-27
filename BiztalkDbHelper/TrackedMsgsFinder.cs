@@ -13,7 +13,14 @@ namespace BiztalkDbHelper
     {
 		public List<Message> GetTrackedMessages(MsgSearchQuery query, SqlConnection sqlConnection)
 		{
-			string sqlQuery = @"SELECT TOP " + query.QueryLimit + @" trackData.[MessageInstance/InstanceID]
+            if(query == null)
+                throw new ArgumentNullException("query cannot be null");
+            if (sqlConnection == null)
+                throw new ArgumentNullException("sqlConnection cannot be null");
+            if (sqlConnection.State != System.Data.ConnectionState.Open)
+                sqlConnection.Open();
+
+            string sqlQuery = @"SELECT TOP " + query.QueryLimit + @" trackData.[MessageInstance/InstanceID]
 	  ,trackData.[ServiceInstance/InstanceID]
 	--  ,trackData.[ServiceInstance/ActivityID]
 	--  ,trackData.[Service/ServiceClassGUID]
