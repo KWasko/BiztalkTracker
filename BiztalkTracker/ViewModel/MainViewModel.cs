@@ -19,14 +19,13 @@ namespace BiztalkTracker.ViewModel
 {
     [ImplementPropertyChanged]
     public class MainViewModel
-    {
-      
+    {     
         public List<string> ConnectionStringsList { get; set; }
         public string SelectedConnectionString { get; set;}
 
         public MsgSearchQuery SearchQuery { get; set; }
         public ObservableCollection<SelectableMessage> Messages { get; set; }
-
+        public int MessagesCount { get; set; } = 0;
         public SelectableMessage SelectedMessage { get; set; }
 
         public ICommand SearchCommand { get; set; }
@@ -57,7 +56,7 @@ namespace BiztalkTracker.ViewModel
             using (var con = new SqlConnection(SelectedConnectionString))
             {
                 ITrackedMsgsFinder trMsgFinder = new TrackedMsgsFinder();
-               // ITrackedMsgsFinder trMsgFinder = new FakeTrackedMsgsFinder();
+                //ITrackedMsgsFinder trMsgFinder = new FakeTrackedMsgsFinder();
                 List<Message> messages = null;
                 try
                 {
@@ -76,6 +75,7 @@ namespace BiztalkTracker.ViewModel
                     var selectableMessage = Mapper.Instance.Map<SelectableMessage>(msg);
                     Messages.Add(selectableMessage);
                 }
+                MessagesCount = Messages.Count;
             }
         }
 

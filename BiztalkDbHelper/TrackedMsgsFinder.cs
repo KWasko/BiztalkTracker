@@ -44,21 +44,21 @@ namespace BiztalkDbHelper
 			if (query.DateTo.HasValue)
 				sqlQuery += string.Format("\nAND trackData.[Event/Timestamp]<='{0}'", query.DateTo.Value.ToString("yyyy-MM-dd HH:mm:ss"));
 			if (!string.IsNullOrWhiteSpace(query.SchemaName))
-				sqlQuery += string.Format("\nAND trackData.[MessageInstance/SchemaName] LIKE'%{0}%'", query.SchemaName.Replace("'", "''"));
+				sqlQuery += string.Format("\nAND trackData.[MessageInstance/SchemaName] LIKE'{0}'", query.SchemaName.Replace("'", "''"));
 			if (!string.IsNullOrWhiteSpace(query.Location))
-				sqlQuery += string.Format("\nAND trackData.[Event/URL] LIKE'%{0}%'", query.Location.Replace("'", "''"));
+				sqlQuery += string.Format("\nAND trackData.[Event/URL] LIKE'{0}'", query.Location.Replace("'", "''"));
 			if (!string.IsNullOrWhiteSpace(query.Port))
-				sqlQuery += string.Format("\nAND trackData.[Event/Port] LIKE'%{0}%'", query.Port.Replace("'", "''"));
+				sqlQuery += string.Format("\nAND trackData.[Event/Port] LIKE'{0}'", query.Port.Replace("'", "''"));
             if (!string.IsNullOrWhiteSpace(query.PortDirection))
-                sqlQuery += string.Format("\nAND trackData.[Event/Direction] LIKE'%{0}%'", query.Port.Replace("'", "''"));
+                sqlQuery += string.Format("\nAND trackData.[Event/Direction] LIKE'{0}'", query.PortDirection.Replace("'", "''"));
             if (!string.IsNullOrWhiteSpace(query.ServiceName))
-				sqlQuery += string.Format("\nAND trackData.[ServiceInstance/ServiceName] LIKE'%{0}%'", query.ServiceName.Replace("'", "''"));
+				sqlQuery += string.Format("\nAND trackData.[ServiceInstance/ServiceName] LIKE'{0}'", query.ServiceName.Replace("'", "''"));
             if (!string.IsNullOrWhiteSpace(query.ServiceId))
-                sqlQuery += string.Format("\nAND trackData.[ServiceInstance/ServiceId] LIKE'%{0}%'", query.ServiceId.Replace("'", "''"));
+                sqlQuery += string.Format("\nAND trackData.[ServiceInstance/ServiceId] LIKE'{0}'", query.ServiceId.Replace("'", "''"));
             if (!string.IsNullOrWhiteSpace(query.MessageId))
-                sqlQuery += string.Format("\nAND trackData.[MessageInstance/InstanceID] LIKE'%{0}%'", query.MessageId.Replace("'", "''"));
+                sqlQuery += string.Format("\nAND trackData.[MessageInstance/InstanceID] LIKE'{0}'", query.MessageId.Replace("'", "''"));
             if (!string.IsNullOrWhiteSpace(query.Url))
-                sqlQuery += string.Format("\nAND trackData.[Event/URL] LIKE'%{0}%'", query.Url.Replace("'", "''"));
+                sqlQuery += string.Format("\nAND trackData.[Event/URL] LIKE'{0}'", query.Url.Replace("'", "''"));
             sqlQuery += "\n order by trackData.[Event/Timestamp] desc";
 
 			IEnumerable<Message> messages = new List<Message>();

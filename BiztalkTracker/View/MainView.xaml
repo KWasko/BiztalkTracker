@@ -101,7 +101,15 @@
             <Button Margin="5" Padding="5" Content="Clear all search definition" Command="{Binding ViewModel.ClearSearchDefinitionCommand}"/>
             <Button Margin="5" Padding="5" Content="Find messages" Command="{Binding ViewModel.SearchCommand}"/>
         </StackPanel>
-        <GroupBox Header="Messages" Grid.Column="1 " Grid.Row="0">
+        <GroupBox Name="messagesGroupBox" Grid.Column="1 " Grid.Row="0">
+            <GroupBox.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Padding="0 0 0 3">
+                        <Run>Found Messages: </Run>
+                        <Run FontWeight="Bold" Text="{Binding ViewModel.MessagesCount}" DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type GroupBox}}}" ></Run>
+                    </TextBlock>
+                </DataTemplate>
+            </GroupBox.HeaderTemplate>
             <DataGrid  Name="dataGrid"  Grid.ColumnSpan="1"  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" SelectionMode="Extended" SelectionUnit="CellOrRowHeader" ColumnWidth="100" SelectedCellsChanged="dataGrid_SelectedCellsChanged" ItemsSource="{Binding ViewModel.Messages}" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" AlternatingRowBackground="AliceBlue">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
