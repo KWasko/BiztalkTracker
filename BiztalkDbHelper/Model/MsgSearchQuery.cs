@@ -13,6 +13,7 @@ namespace BiztalkDbHelper.Model
         public string Url { get; set; }
         public string Location { get; set; }    
         public string Port { get; set; }
+        public string PortDirection { get; set; }
         public string ServiceName { get; set; }
         public string ServiceId { get; set; }
         public string MessageId { get; set; }

@@ -49,7 +49,9 @@ namespace BiztalkDbHelper
 				sqlQuery += string.Format("\nAND trackData.[Event/URL] LIKE'%{0}%'", query.Location.Replace("'", "''"));
 			if (!string.IsNullOrWhiteSpace(query.Port))
 				sqlQuery += string.Format("\nAND trackData.[Event/Port] LIKE'%{0}%'", query.Port.Replace("'", "''"));
-			if (!string.IsNullOrWhiteSpace(query.ServiceName))
+            if (!string.IsNullOrWhiteSpace(query.PortDirection))
+                sqlQuery += string.Format("\nAND trackData.[Event/Direction] LIKE'%{0}%'", query.Port.Replace("'", "''"));
+            if (!string.IsNullOrWhiteSpace(query.ServiceName))
 				sqlQuery += string.Format("\nAND trackData.[ServiceInstance/ServiceName] LIKE'%{0}%'", query.ServiceName.Replace("'", "''"));
             if (!string.IsNullOrWhiteSpace(query.ServiceId))
                 sqlQuery += string.Format("\nAND trackData.[ServiceInstance/ServiceId] LIKE'%{0}%'", query.ServiceId.Replace("'", "''"));
